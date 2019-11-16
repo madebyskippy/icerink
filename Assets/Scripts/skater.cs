@@ -52,6 +52,9 @@ public class skater : MonoBehaviour
 
         if ((currentArcPolar.y- currentArcStartPolar.y) > currentArcAngle)
         {
+            //this equation isn't working cus im making everything go 0-360 
+            //so if start is at 355 and current is at 20
+            //even if the goal is 25, it won't register trigger this
             newStroke();
         }
 
@@ -61,7 +64,6 @@ public class skater : MonoBehaviour
     {
         currentArcAngle = Random.Range(10f, 120f);
         currentArcRadius = Random.Range(0.25f, 4f);
-        currentArcStartPolar = new Vector2(currentArcRadius, 0);
         currentArcCenter = transform.position + (Vector3)(currentArcRadius * Random.insideUnitCircle.normalized);
         //how to make it wrap????
 
@@ -71,6 +73,7 @@ public class skater : MonoBehaviour
             currentAngle += 360;
         }
         currentArcPolar = new Vector2(currentArcRadius, currentAngle);
+        currentArcStartPolar = new Vector2(currentArcRadius, currentAngle);
         Debug.Log("new stroke "+currentArcAngle+" "+currentArcRadius+" "+currentArcCenter);
 
         radius.transform.position = currentArcCenter;
